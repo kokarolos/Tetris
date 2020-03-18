@@ -13,14 +13,15 @@ namespace TetrisGame
 
     public partial class Form1 : Form
     {
-        readonly Rectangle cube = new Rectangle();
+        readonly Cube cube = new Cube();
+
 
         public Form1()
         {
             InitializeComponent();
-            InitializeComponent();
-            KeyDown += new KeyEventHandler(Form1_KeyDown);
-            timer1.Interval = (1000 / 60);
+            // KeyDown += new KeyEventHandler(Form1_KeyDown);
+            Timer timer1 = new Timer();
+            timer1.Interval = (1000/10);
             timer1.Tick += timer1_Tick;
             timer1.Start();
         }
