@@ -20,10 +20,9 @@ namespace Models.Concrete
         private void GenerateBlueRicky()
         {
             rects.Add(new Rectangle(Xposition, Yposition, Width, Height));
-            for (int i = 0; i <= 3; i++)
-            {
-                rects.Add(new Rectangle(rects[0].Xposition + Height, Yposition , Width, Height));
-            }
+            rects.Add(new Rectangle(Xposition, rects[0].Yposition+Height , Width, Height));
+            rects.Add(new Rectangle(rects[1].Xposition+Width, rects[1].Yposition , Width, Height));
+            rects.Add(new Rectangle(rects[2].Xposition+Width, rects[1].Yposition , Width, Height));
         }
     }
 }

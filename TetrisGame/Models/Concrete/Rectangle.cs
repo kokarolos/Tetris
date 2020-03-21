@@ -12,7 +12,6 @@ namespace Models
         public int Height { get; set; } = 15;
         public virtual Color Color { get; set; }
         public List<Rectangle> rects { get; set; } = new List<Rectangle>();
-
         public Rectangle() { }
 
         public Rectangle(int Xposition, int Yposition)
@@ -35,14 +34,7 @@ namespace Models
                 g.FillRectangle(b, item.Xposition, item.Yposition, item.Width, item.Height);
             }
         }
-
-        public void Movement()
-        {
-            foreach (var item in rects)
-            {
-                item.Yposition += item.Yposition + 1;
-            }
-        }
+        public void Movement()=>rects.ForEach(x => x.Yposition += 10);
 
     }
 }
