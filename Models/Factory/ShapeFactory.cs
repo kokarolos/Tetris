@@ -11,7 +11,7 @@ namespace Models.Factory
         public static Shape Create()
         {
             var shapeType = GetAllShapesType();
-            return Activator.CreateInstance(shapeType[_random.Next(1,shapeType.Count())]) as Shape;
+            return Activator.CreateInstance(shapeType[_random.Next(0,shapeType.Count())]) as Shape;
         }
 
         private static Type[] GetAllShapesType()
