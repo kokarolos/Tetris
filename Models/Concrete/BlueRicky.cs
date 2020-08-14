@@ -2,14 +2,14 @@
 
 namespace Models.Concrete
 {
-    public class BlueRicky :Rectangle
+    public class BlueRicky : Shape
     {
         public override int Yposition { get; set; } = 150;
-        public override Color Color { get; set; } = Color.Cyan;
 
         public BlueRicky()
         {
-            GenerateBlueRicky();
+            _color = Color.Blue;
+            Create();
         }
 
         public BlueRicky(int Xposition, int Yposition) : base(Xposition, Yposition)
@@ -19,12 +19,12 @@ namespace Models.Concrete
         }
 
         //Creates Initial Ricky
-        private void GenerateBlueRicky()
+        protected override void Create()
         {
-            rects.Add(new Rectangle(Xposition, Yposition, Width, Height));
-            rects.Add(new Rectangle(Xposition, rects[0].Yposition+Height , Width, Height));
-            rects.Add(new Rectangle(rects[1].Xposition+Width, rects[1].Yposition , Width, Height));
-            rects.Add(new Rectangle(rects[2].Xposition+Width, rects[1].Yposition , Width, Height));
+            _rectangles.Add(new Rectangle(Xposition, Yposition, Width, Height));
+            _rectangles.Add(new Rectangle(Xposition, _rectangles[0].Y + Height, Width, Height));
+            _rectangles.Add(new Rectangle(_rectangles[1].X + Width, _rectangles[1].Y, Width, Height));
+            _rectangles.Add(new Rectangle(_rectangles[2].X + Width, _rectangles[1].Y, Width, Height));
         }
     }
 }

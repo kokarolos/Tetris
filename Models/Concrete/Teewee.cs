@@ -1,31 +1,23 @@
-﻿using System.Collections.Generic;
-using System.Drawing;
+﻿using System.Drawing;
 
 namespace Models.Concrete
 {
-    public class Teewee :Rectangle
+    public class Teewee :Shape
     {
-        public override Color Color { get; set; } = Color.Red;
-
         public Teewee()
         {
-            GenerateTeewee();
-        }
-
-        public Teewee(int Xposition, int Yposition) : base(Xposition, Yposition)
-        {
-            this.Xposition = Xposition;
-            this.Yposition = Xposition;
+            _color = Color.Red;
+            Create();
         }
 
         //Creates Initial Teewee
-        private void GenerateTeewee()
+        protected override void Create()
         {
             for (int i = 0; i <= 3; i++)
             {
-                rects.Add(new Rectangle(Xposition + i * 10, Yposition + Width, Width, Height));
+                _rectangles.Add(new Rectangle(Xposition + i * 10, Yposition + Width, Width, Height));
             }
-            rects.Add(new Rectangle(rects[1].Xposition +5 , rects[1].Yposition - Height, Width, Height));
+            _rectangles.Add(new Rectangle(_rectangles[1].X + 5, _rectangles[1].Y - Height, Width, Height));
         }
     }
 }

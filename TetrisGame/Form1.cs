@@ -5,6 +5,8 @@ using System.Windows.Forms;
 
 namespace TetrisGame
 {
+    //Done : All models are drawn correctly;
+
     //TODO : Hard Refactor :
     // Fix inheritance ripple effect -> rectangle -> to all conrete classes
     // favor composition over inheritance, example. BlueRicky has rectangle not is a rectangle.
@@ -41,19 +43,18 @@ namespace TetrisGame
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            riz.Movement();
-            hero.Movement();
-
+            riz.Move();
+            hero.Move();
             pictureBox1.Invalidate(); 
         }
 
-        private void Form1_KeyDown(object sender, KeyEventArgs e) {}
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+
+        }
+
         private void DrawAllModels(PaintEventArgs e)
         {
-            //teewee 
-            //orangeRicky
-            //smashboy
-
             //smashBoy.Draw(e);
             //hero.Draw(e);
             //orangeRicky.Draw(e);

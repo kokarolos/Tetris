@@ -2,12 +2,12 @@
 
 namespace Models
 {
-    public class Smashboy : Rectangle
+    public class Smashboy : Shape
     {
-        public override Color Color { get; set; } = Color.BlanchedAlmond;
         public Smashboy()
         {
-            GenerateCube();
+            _color = Color.BlanchedAlmond;
+            Create();
         }
 
         public Smashboy(int Xposition, int Yposition) : base(Xposition, Yposition)
@@ -17,19 +17,19 @@ namespace Models
         }
 
         //Creates Initial Cube
-        private void GenerateCube()
+        protected override void Create()
         {
-            rects.Add(new Rectangle(Xposition, Yposition,Width,Height)); //Initial Rectangle
+            _rectangles.Add(new Rectangle(Xposition, Yposition, Width, Height)); //Initial Rectangle
             for (int i = 1; i <= 3; i++)
             {
-                rects.Add(new Rectangle(rects[0].Xposition + Width, rects[0].Yposition, Width, Height)); //Secondary Rectangle
+                _rectangles.Add(new Rectangle(_rectangles[0].X + Width, _rectangles[0].Y, Width, Height)); //Secondary Rectangle
                 if (i == 2)
                 {
-                    rects.Add(new Rectangle(rects[0].Xposition, rects[0].Yposition + Height, Width, Height));
+                    _rectangles.Add(new Rectangle(_rectangles[0].X, _rectangles[0].Y + Height, Width, Height));
                 }
                 if (i == 3)
                 {
-                    rects.Add(new Rectangle(rects[1].Xposition, rects[1].Yposition + Height, Width, Height));
+                    _rectangles.Add(new Rectangle(_rectangles[1].X, _rectangles[1].Y + Height, Width, Height));
                 }
             }
         }

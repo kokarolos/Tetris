@@ -2,13 +2,14 @@
 
 namespace Models.Concrete
 {
-    public class RhodeIslandZ :Rectangle
+    public class RhodeIslandZ :Shape
     {
         public override int Yposition { get; set; } = 150;
-        public override Color Color { get; set; } = Color.Cyan;
+
         public RhodeIslandZ()
         {
-            GenerateClevelandZ();
+            _color = Color.Cyan;
+            Create();
         }
 
         public RhodeIslandZ(int Xposition, int Yposition) : base(Xposition, Yposition)
@@ -16,14 +17,13 @@ namespace Models.Concrete
             this.Xposition = Xposition;
             this.Yposition = Xposition;
         }
-        //Creates Initial 
-        private void GenerateClevelandZ()
-        {
-            rects.Add(new Rectangle(Xposition, Yposition, Width, Height));
-            rects.Add(new Rectangle(rects[0].Xposition + Width , Yposition, Width, Height));
-            rects.Add(new Rectangle(Xposition, rects[0].Yposition + Width, Height, Width));
-            rects.Add(new Rectangle(rects[2].Xposition-Width, rects[2].Yposition, Height, Width));
-        }
 
+        protected override void Create()
+        {
+            _rectangles.Add(new Rectangle(Xposition, Yposition, Width, Height));
+            _rectangles.Add(new Rectangle(_rectangles[0].X + Width, Yposition, Width, Height));
+            _rectangles.Add(new Rectangle(Xposition, _rectangles[0].Y + Width, Height, Width));
+            _rectangles.Add(new Rectangle(_rectangles[2].X - Width, _rectangles[2].Y, Height, Width));
+        }
     }
 }

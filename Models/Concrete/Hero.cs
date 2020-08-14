@@ -2,13 +2,13 @@
 
 namespace Models
 {
-    public class Hero : Rectangle
+    public class Hero : Shape
     {
-        public override Color Color { get; set; } = Color.Red;
+        //public override Color Color { get; set; } = Color.Red;
 
         public Hero()
         {
-            GenerateHero();
+            Create();
         }
 
         public Hero(int Xposition, int Yposition) : base(Xposition, Yposition)
@@ -18,11 +18,11 @@ namespace Models
         }
 
         //Creates Initial Hero
-        private void GenerateHero()
+        protected override void Create()
         {
-            for(int i =0; i<=4; i++)
+            for (int i = 0; i <= 4; i++)
             {
-                rects.Add(new Rectangle(Xposition + i*10, Yposition + Width, Width, Height));
+                _rectangles.Add(new Rectangle(Xposition + i * 10, Yposition + Width, Width, Height));
             }
         }
     }

@@ -2,13 +2,12 @@
 
 namespace Models.Concrete
 {
-    public class OrangeRicky : Rectangle
+    public class OrangeRicky : Shape
     {
-        public override Color Color { get; set; } = Color.Orange;
-
         public OrangeRicky()
         {
-            GenerateOrangeRicky();
+            _color = Color.Orange;
+            Create();
         }
 
         public OrangeRicky(int Xposition, int Yposition) : base(Xposition, Yposition)
@@ -17,20 +16,17 @@ namespace Models.Concrete
             this.Yposition = Xposition;
         }
 
-
         //Creates Initial Ricky
-        private void GenerateOrangeRicky()
+        protected override void Create()
         {
-           
             for (int i = 0; i <= 4; i++)
             {
-               if(i==4)
-               {
-                    rects.Add(new Rectangle(rects[3].Xposition + 10, rects[3].Yposition - Width, Width,Height));
-               }
-               rects.Add(new Rectangle(Xposition + i*10, Yposition + Width, Width, Height));
+                if (i == 4)
+                {
+                    _rectangles.Add(new Rectangle(_rectangles[3].X + 10, _rectangles[3].Y - Width, Width, Height));
+                }
+                _rectangles.Add(new Rectangle(Xposition + i * 10, Yposition + Width, Width, Height));
             }
-
         }
     }
 }
