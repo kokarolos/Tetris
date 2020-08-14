@@ -33,7 +33,10 @@ namespace Models
             }
         }
 
-        public void Move()=>_rectangles.ForEach(x => x.Y += 10);
+        public void Move()
+        {
+            _rectangles.ForEach(x => x.Y += 10);
+        }
 
         protected abstract void Create();
     }

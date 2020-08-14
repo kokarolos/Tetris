@@ -50,6 +50,7 @@
     <Compile Include="Concrete\Hero.cs" />
     <Compile Include="Concrete\OrangeRicky.cs" />
     <Compile Include="Concrete\Teewee.cs" />
+    <Compile Include="Factory\ShapeFactory.cs" />
     <Compile Include="IDrawable.cs" />
     <Compile Include="IMoveable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,5 +1,6 @@
 ﻿using Models;
 using Models.Concrete;
+using Models.Factory;
 using System;
 using System.Windows.Forms;
 
@@ -20,13 +21,6 @@ namespace TetrisGame
 
     public partial class Form1 : Form
     {
-        readonly Smashboy smashBoy = new Smashboy();
-        readonly Hero hero = new Hero();
-        readonly OrangeRicky orangeRicky = new OrangeRicky();
-        readonly Teewee teewee = new Teewee();
-        readonly BlueRicky blueRicky = new BlueRicky();
-        readonly ClevelandZ clz = new ClevelandZ();
-        readonly RhodeIslandZ riz = new RhodeIslandZ();
 
         public Form1()
         {
@@ -40,19 +34,12 @@ namespace TetrisGame
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            DrawAllModels(e);
+            Shape randomShape = ShapeFactory.Create();
+            randomShape.Draw(e);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            riz.Move();
-            hero.Move();
-            smashBoy.Move();
-            orangeRicky.Move();
-            teewee.Move();
-            blueRicky.Move();
-            clz.Move();
-            riz.Move();
             pictureBox1.Invalidate(); 
         }
 
@@ -63,13 +50,8 @@ namespace TetrisGame
 
         private void DrawAllModels(PaintEventArgs e)
         {
-            smashBoy.Draw(e);
-            hero.Draw(e);
-            orangeRicky.Draw(e);
-            teewee.Draw(e);
-            blueRicky.Draw(e);
-            clz.Draw(e);
-            riz.Draw(e);
+            //For testing purposes;
         }
+
     }
 }
