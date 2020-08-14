@@ -5,6 +5,14 @@ using System.Windows.Forms;
 
 namespace TetrisGame
 {
+    //TODO : Hard Refactor :
+    // Fix inheritance ripple effect -> rectangle -> to all conrete classes
+    // favor composition over inheritance, example. BlueRicky has rectangle not is a rectangle.
+    // TODO 2 : Create Factory so i can generate every 5 sec new shapes 
+    // TODO fix some shapes movement as they dont move 
+    //TODO bluericky bug
+    //TODO :Fix bug of clz
+    //Refactor 19-25 lns
 
     public partial class Form1 : Form
     {
@@ -42,13 +50,17 @@ namespace TetrisGame
         private void Form1_KeyDown(object sender, KeyEventArgs e) {}
         private void DrawAllModels(PaintEventArgs e)
         {
-            smashBoy.Draw(e);
-            hero.Draw(e);
-            orangeRicky.Draw(e);
-            teewee.Draw(e);
-            blueRicky.Draw(e);
-            clz.Draw(e);
-            riz.Draw(e);
+            //teewee 
+            //orangeRicky
+            //smashboy
+
+            //smashBoy.Draw(e);
+            //hero.Draw(e);
+            //orangeRicky.Draw(e);
+            //teewee.Draw(e);
+            //blueRicky.Draw(e);
+            //clz.Draw(e);
+            //riz.Draw(e);
         }
     }
 }

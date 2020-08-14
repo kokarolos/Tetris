@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace Models
 {
-    public class Rectangle :IDrawable
+    public class Rectangle : IDrawable
     {
         public virtual int Xposition { get; set; } = 250;
         public virtual int Yposition { get; set; } = 10;
@@ -25,6 +25,7 @@ namespace Models
             Width = width;
             Height = height;
         }
+
         public void Draw(PaintEventArgs e)
         {
             foreach (var item in rects)
@@ -34,6 +35,7 @@ namespace Models
                 g.FillRectangle(b, item.Xposition, item.Yposition, item.Width, item.Height);
             }
         }
+
         public void Movement()=>rects.ForEach(x => x.Yposition += 10);
 
     }

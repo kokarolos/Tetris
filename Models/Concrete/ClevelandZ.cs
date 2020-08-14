@@ -2,10 +2,11 @@
 
 namespace Models.Concrete
 {
-    public class ClevelandZ :Rectangle
+    public class ClevelandZ : Rectangle
     {
         public override int Yposition { get; set; } = 150;
         public override Color Color { get; set; } = Color.Cyan;
+
         public ClevelandZ()
         {
             GenerateClevelandZ();

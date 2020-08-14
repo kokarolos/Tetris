@@ -6,6 +6,7 @@ namespace Models.Concrete
     {
         public override int Yposition { get; set; } = 150;
         public override Color Color { get; set; } = Color.Cyan;
+
         public BlueRicky()
         {
             GenerateBlueRicky();
@@ -16,6 +17,7 @@ namespace Models.Concrete
             this.Xposition = Xposition;
             this.Yposition = Xposition;
         }
+
         //Creates Initial Ricky
         private void GenerateBlueRicky()
         {
