@@ -10,12 +10,6 @@ namespace Models.Concrete
             Create();
         }
 
-        public OrangeRicky(int Xposition, int Yposition) : base(Xposition, Yposition)
-        {
-            this.Xposition = Xposition;
-            this.Yposition = Xposition;
-        }
-
         //Creates Initial Ricky
         protected override void Create()
         {
@@ -23,9 +17,9 @@ namespace Models.Concrete
             {
                 if (i == 4)
                 {
-                    _rectangles.Add(new Rectangle(_rectangles[3].X + 10, _rectangles[3].Y - Width, Width, Height));
+                    _rectangles.Add(new Rectangle(_rectangles[3].X + 10, _rectangles[3].Y - _width, _width, _height));
                 }
-                _rectangles.Add(new Rectangle(Xposition + i * 10, Yposition + Width, Width, Height));
+                _rectangles.Add(new Rectangle(_xPosition + i * 10, _yPosition + _width, _width, _height));
             }
         }
     }

@@ -7,6 +7,7 @@ namespace TetrisGame
 {
     //Done : All models are drawn correctly;
 
+
     //TODO : Hard Refactor :
     // Fix inheritance ripple effect -> rectangle -> to all conrete classes
     // favor composition over inheritance, example. BlueRicky has rectangle not is a rectangle.
@@ -15,6 +16,7 @@ namespace TetrisGame
     //TODO bluericky bug
     //TODO :Fix bug of clz
     //Refactor 19-25 lns
+    //TODO : Movement fix
 
     public partial class Form1 : Form
     {
@@ -45,6 +47,12 @@ namespace TetrisGame
         {
             riz.Move();
             hero.Move();
+            smashBoy.Move();
+            orangeRicky.Move();
+            teewee.Move();
+            blueRicky.Move();
+            clz.Move();
+            riz.Move();
             pictureBox1.Invalidate(); 
         }
 
@@ -55,13 +63,13 @@ namespace TetrisGame
 
         private void DrawAllModels(PaintEventArgs e)
         {
-            //smashBoy.Draw(e);
-            //hero.Draw(e);
-            //orangeRicky.Draw(e);
-            //teewee.Draw(e);
-            //blueRicky.Draw(e);
-            //clz.Draw(e);
-            //riz.Draw(e);
+            smashBoy.Draw(e);
+            hero.Draw(e);
+            orangeRicky.Draw(e);
+            teewee.Draw(e);
+            blueRicky.Draw(e);
+            clz.Draw(e);
+            riz.Draw(e);
         }
     }
 }

@@ -6,16 +6,20 @@ namespace Models
 {
     public abstract class Shape : IDrawable , IMoveable
     {
-        public virtual int Xposition { get; set; } = 250;
-        public virtual int Yposition { get; set; } = 10;
-        public int Width { get; set; } = 15;
-        public int Height { get; set; } = 15;
+        protected int _xPosition;
+        protected int _yPosition;
+        protected int _width;
+        protected int _height;
         protected Color _color;
 
         protected List<Rectangle> _rectangles;
 
         public Shape()
         {
+            _xPosition = 250;
+            _yPosition = 10;
+            _width = 15;
+            _height = 15;
             _rectangles = new List<Rectangle>();
         }
 
@@ -28,6 +32,7 @@ namespace Models
                 g.FillRectangle(b, rectangle.X, rectangle.Y, rectangle.Width, rectangle.Height);
             }
         }
+
         public void Move()=>_rectangles.ForEach(x => x.Y += 10);
 
         protected abstract void Create();

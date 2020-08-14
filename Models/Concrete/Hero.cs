@@ -10,19 +10,12 @@ namespace Models
         {
             Create();
         }
-
-        public Hero(int Xposition, int Yposition) : base(Xposition, Yposition)
-        {
-            this.Xposition = Xposition;
-            this.Yposition = Xposition;
-        }
-
         //Creates Initial Hero
         protected override void Create()
         {
             for (int i = 0; i <= 4; i++)
             {
-                _rectangles.Add(new Rectangle(Xposition + i * 10, Yposition + Width, Width, Height));
+                _rectangles.Add(new Rectangle(_xPosition + i * 10, _yPosition + _width, _width, _height));
             }
         }
     }
