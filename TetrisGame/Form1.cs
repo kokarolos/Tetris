@@ -1,7 +1,9 @@
 ﻿using Models;
+using Models.Concrete;
 using Models.Factory;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace TetrisGame
@@ -9,7 +11,6 @@ namespace TetrisGame
     //Done : All models are drawn correctly;
     //Randomly Respawning Shape objects;
     //Factory Method implemented;
-
 
 
     //TODO : Hard Refactor : -> kinda done
@@ -26,26 +27,13 @@ namespace TetrisGame
             InitializeComponent();
             shapes = CreateInitialShapeStack();
             KeyDown += new KeyEventHandler(Form1_KeyDown);
-            Timer frameRefreshTimer = new Timer
-            {
-                Interval = 1000 / 10
-            };
-            frameRefreshTimer.Tick += frameRefreshTimer_Tick;
-            frameRefreshTimer.Start();
-
-            Timer respawnShapeTimer = new Timer();
-            respawnShapeTimer.Interval = 5000 / 10;
-            respawnShapeTimer.Tick += respawnShapeTimer_Tick;
-            respawnShapeTimer.Start();
+            InitializeTimers();
         }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            foreach (var shape in shapes)
-            {
-                shape.Draw(e);
-                shapes.Pop();
-            }
+            var shape = shapes.Pop();
+            shape.Draw(e);
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -60,7 +48,7 @@ namespace TetrisGame
 
         private void respawnShapeTimer_Tick(object sender, EventArgs e)
         {
-            
+            pictureBox1_Paint(sender, e as PaintEventArgs);
         }
 
         private Stack<Shape> CreateInitialShapeStack()
@@ -76,7 +64,23 @@ namespace TetrisGame
         private void frameRefreshTimer_Tick(object sender, EventArgs e)
         {
             pictureBox1.Invalidate();
+        }
 
+        private void InitializeTimers()
+        {
+            Timer frameRefreshTimer = new Timer
+            {
+                Interval = Settings.RefreshRate
+            };
+            frameRefreshTimer.Tick += frameRefreshTimer_Tick;
+            frameRefreshTimer.Start();
+
+            Timer respawnShapeTimer = new Timer
+            {
+                Interval = Settings.RespawnRate
+            };
+            respawnShapeTimer.Tick += respawnShapeTimer_Tick;
+            respawnShapeTimer.Start();
         }
     }
 }

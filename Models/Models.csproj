@@ -46,6 +46,7 @@
     <Compile Include="Concrete\BlueRicky.cs" />
     <Compile Include="Concrete\ClevelandZ.cs" />
     <Compile Include="Concrete\RhodeIslandZ.cs" />
+    <Compile Include="Concrete\Settings.cs" />
     <Compile Include="Concrete\Smashboy.cs" />
     <Compile Include="Concrete\Hero.cs" />
     <Compile Include="Concrete\OrangeRicky.cs" />
