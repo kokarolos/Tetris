@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Models.Concrete;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -12,14 +13,15 @@ namespace Models
         protected int _height;
         protected Color _color;
 
+
         protected List<Rectangle> _rectangles;
 
         public Shape()
         {
             _xPosition = 250;
             _yPosition = 10;
-            _width = 15;
-            _height = 15;
+            _width = Settings.ShapeWidth;
+            _height = Settings.ShapeWidth;
             _rectangles = new List<Rectangle>();
         }
 
@@ -33,9 +35,9 @@ namespace Models
             }
         }
 
-        public void Move()
+        public void Move(KeyEventArgs e)
         {
-            _rectangles.ForEach(x => x.Y += 10);
+            _rectangles.ForEach(x => x.Y += 100);
         }
 
         protected abstract void Create();

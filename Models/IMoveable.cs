@@ -1,7 +1,9 @@
-﻿namespace Models
+﻿using System.Windows.Forms;
+
+namespace Models
 {
     public interface IMoveable
     {
-        void Move();
+        void Move(KeyEventArgs e);
     }
 }
