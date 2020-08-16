@@ -3,24 +3,18 @@ using Models.Concrete;
 using Models.Factory;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace TetrisGame
 {
-    //Done : All models are drawn correctly;
-    //Randomly Respawning Shape objects;
-    //Factory Method implemented;
-
-
-    //TODO : Hard Refactor : -> kinda done
-    //Select and 
-    //Refactor 19-25 lns
     //TODO : Movement fix
+    //TODO: Fix shape respawn time -> Set it to 10 sec
+    //TODO Fix Grid System 
+
 
     public partial class Form1 : Form
     {
-        //Lifo 
         Stack<Shape> shapes;
         public Form1()
         {
@@ -32,6 +26,7 @@ namespace TetrisGame
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
+            DrawGridSystem(e);
             var shape = shapes.Pop();
             shape.Draw(e);
         }
@@ -81,6 +76,22 @@ namespace TetrisGame
             };
             respawnShapeTimer.Tick += respawnShapeTimer_Tick;
             respawnShapeTimer.Start();
+        }
+        private void DrawGridSystem(PaintEventArgs e)
+        {
+            var numOfCells = Settings.NumOfCells;
+            var cellSize = Settings.CellSize;
+            Graphics g = e.Graphics;
+            Pen p = new Pen(Color.White);
+            for (var i = 0; i < numOfCells; ++i)
+            {
+                g.DrawLine(p, 0, i * cellSize, numOfCells * cellSize, i * cellSize);
+            }
+
+            for (var x = 0; x < numOfCells; ++x)
+            {
+                g.DrawLine(p, x * cellSize, 0, x * cellSize, numOfCells * cellSize);
+            }
         }
     }
 }
