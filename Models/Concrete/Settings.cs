@@ -2,8 +2,8 @@
 {
     public sealed class Settings
     {
-        public static int RefreshRate { get => 150; }
-        public static int RespawnRate { get => 100; }
+        public static int RefreshRate { get => 1500; }
+        public static int RespawnRate { get => 1000; }
         public static int NumOfCells { get => 100; }
         public static int CellSize { get => 25; }
         public static int Speed { get => 1500; }

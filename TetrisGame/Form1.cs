@@ -40,7 +40,14 @@ namespace TetrisGame
 
         private void respawnShapeTimer_Tick(object sender, EventArgs e)
         {
-            shape.OnShapeMovement(Direction.Down);
+            while(shape.IsColliding(pictureBox1.Bottom))
+            {
+                shape.OnShapeMovement(Direction.Down);
+            }
+            if (shape.IsColliding(pictureBox1.Bottom))
+            {
+                shape = ShapeFactory.CreateRandomShape();
+            }
             pictureBox1.Invalidate();
         }
 

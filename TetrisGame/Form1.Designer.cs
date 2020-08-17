@@ -48,8 +48,13 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
             // 
+            // frameRefreshTimer
+            // 
+            this.frameRefreshTimer.Enabled = true;
+            // 
             // respawnShapeTimer
             // 
+            this.respawnShapeTimer.Enabled = true;
             this.respawnShapeTimer.Tick += new System.EventHandler(this.respawnShapeTimer_Tick);
             // 
             // label1

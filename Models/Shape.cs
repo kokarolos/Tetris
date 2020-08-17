@@ -82,7 +82,7 @@ namespace Models
         }
 
         //TODO: Check For collision
-        public bool IsColliding()
+        public bool IsColliding(int pictureBoxBottom)
         {
             int bottom = 0;
             foreach (var rect in _rectangles)
@@ -92,7 +92,7 @@ namespace Models
                     bottom = rect.Bottom;
                 }
             }
-            return true;
+            return bottom > pictureBoxBottom;
         }
 
         protected abstract void Create();
