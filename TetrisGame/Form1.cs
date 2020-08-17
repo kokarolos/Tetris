@@ -15,88 +15,54 @@ namespace TetrisGame
 
     public partial class Form1 : Form
     {
-        Stack<Shape> shapes;
-        List<Shape> usedShapes = new List<Shape>();
+        //Stack<Shape> shapes;
+        List<Shape> shapes = new List<Shape>();
+        Shape shape;
+
         public Form1()
         {
             InitializeComponent();
-            shapes = CreateInitialShapeStack();
+            shapes = CreateInitialShapes();
             KeyDown += new KeyEventHandler(Form1_KeyDown);
             InitializeTimers();
         }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-             DrawGridSystem(e);
-            //var shape = shapes.Pop();
-            //usedShapes.Add(shape);
-            //shape.Draw(e);
-            //frameRefreshTimer_Tick(sender, e, shape);
-            Hero h = new Hero();
-            h.Draw(e);
-            respawnShapeTimer_Tick(sender, e, h);
+            DrawGridSystem(e);
+            shape.Draw(e);
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyData == Keys.Right)
-            {
-                //Move x += 10;
-                //if(x >= Window Width - 100){
-                //  x= window width - 100
-                //}
-
-            }
-            if(e.KeyData == Keys.Left)
-            {
-                // Move x-= 10;
-            }
+            shape.Move(e);
         }
+
         private void respawnShapeTimer_Tick(object sender, EventArgs e)
         {
-
-        }
-
-        private void respawnShapeTimer_Tick(object sender, EventArgs e,Shape s)
-        {
+            shape.OnShapeMovement(Direction.Down);
             pictureBox1.Invalidate();
-            s.Move(e as KeyEventArgs);
-        }
-        private void frameRefreshTimer_Tick(object sender, EventArgs e)
-        {
-
-        } 
-
-        private void frameRefreshTimer_Tick(object sender, EventArgs e,Shape s)
-        {
-            s.Move(e as KeyEventArgs);
         }
 
-        private Stack<Shape> CreateInitialShapeStack()
+        private List<Shape> CreateInitialShapes()
         {
-            shapes = new Stack<Shape>();
-            for (int i = 0; i < 50; i++)
+            //shapes = new Stack<Shape>();
+            for (int i = 0; i < 1; i++)
             {
-                shapes.Push(ShapeFactory.CreateRandomShape());
+                shapes.Add(ShapeFactory.CreateRandomShape());
+                shape = shapes[i];
             }
             return shapes;
         }
 
         private void InitializeTimers()
         {
-            Timer frameRefreshTimer = new Timer
+            Timer respawnShapeTimer = new Timer
             {
                 Interval = Settings.RefreshRate
             };
-            frameRefreshTimer.Tick += frameRefreshTimer_Tick;
-            frameRefreshTimer.Start();
-
-            Timer respawnShapeTimer = new Timer
-            {
-                Interval = Settings.RespawnRate
-            };
             respawnShapeTimer.Tick += respawnShapeTimer_Tick;
-            respawnShapeTimer.Start();
+            frameRefreshTimer.Start();
         }
 
         private void DrawGridSystem(PaintEventArgs e)
