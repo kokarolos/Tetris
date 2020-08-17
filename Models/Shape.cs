@@ -18,8 +18,8 @@ namespace Models
 
         public Shape()
         {
-            _xPosition = 250;
-            _yPosition = 10;
+            _xPosition = Settings.ShapePositionX;
+            _yPosition = Settings.ShapePositionY;
             _width = Settings.ShapeWidth;
             _height = Settings.ShapeWidth;
             _rectangles = new List<Rectangle>();

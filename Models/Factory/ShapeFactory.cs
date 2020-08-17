@@ -8,7 +8,7 @@ namespace Models.Factory
     {
         private static Random _random = new Random();
 
-        public static Shape Create()
+        public static Shape CreateRandomShape()
         {
             var shapeType = GetAllShapesType();
             return Activator.CreateInstance(shapeType[_random.Next(0,shapeType.Count())]) as Shape;

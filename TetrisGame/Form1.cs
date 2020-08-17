@@ -27,12 +27,11 @@ namespace TetrisGame
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            //DrawGridSystem(e);
+             DrawGridSystem(e);
             //var shape = shapes.Pop();
             //usedShapes.Add(shape);
             //shape.Draw(e);
             //frameRefreshTimer_Tick(sender, e, shape);
-
             Hero h = new Hero();
             h.Draw(e);
             respawnShapeTimer_Tick(sender, e, h);
@@ -78,14 +77,13 @@ namespace TetrisGame
             shapes = new Stack<Shape>();
             for (int i = 0; i < 50; i++)
             {
-                shapes.Push(ShapeFactory.Create());
+                shapes.Push(ShapeFactory.CreateRandomShape());
             }
             return shapes;
         }
 
         private void InitializeTimers()
         {
-
             Timer frameRefreshTimer = new Timer
             {
                 Interval = Settings.RefreshRate
@@ -100,6 +98,7 @@ namespace TetrisGame
             respawnShapeTimer.Tick += respawnShapeTimer_Tick;
             respawnShapeTimer.Start();
         }
+
         private void DrawGridSystem(PaintEventArgs e)
         {
             var numOfCells = Settings.NumOfCells;
@@ -115,6 +114,11 @@ namespace TetrisGame
             {
                 g.DrawLine(p, x * cellSize, 0, x * cellSize, numOfCells * cellSize);
             }
+        }
+
+        private void scoreLabel_Click(object sender, EventArgs e)
+        {
+            //ScoreLabel
         }
     }
 }
