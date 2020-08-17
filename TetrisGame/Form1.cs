@@ -10,7 +10,8 @@ namespace TetrisGame
 {
     //TODO : Movement fix
     //TODO: Fix shape respawn time -> Set it to 10 sec
-    //TODO Fix Grid System 
+    //TODO Fix Grid System \
+    //TODO : Fix Check x+15 in movement
 
 
     public partial class Form1 : Form

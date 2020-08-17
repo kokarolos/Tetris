@@ -24,6 +24,7 @@ namespace Models
             _height = Settings.ShapeWidth;
             _rectangles = new List<Rectangle>();
         }
+        protected abstract void Create();
 
         public void Draw(PaintEventArgs e)
         {
@@ -37,7 +38,7 @@ namespace Models
 
         public void Move(KeyEventArgs e)
         {
-            if(e.KeyCode.Equals(Keys.Left))
+            if (e.KeyCode.Equals(Keys.Left))
             {
                 OnShapeMovement(Direction.Left);
             }
@@ -95,13 +96,9 @@ namespace Models
             return bottom > pictureBoxBottom;
         }
 
-        protected abstract void Create();
-    }
-
-    public enum Direction
-    {
-        Down,
-        Left,
-        Right
+        private void Rotate()
+        {
+            //
+        }
     }
 }
