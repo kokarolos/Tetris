@@ -8,17 +8,15 @@ using System.Windows.Forms;
 
 namespace TetrisGame
 {
-    //TODO : Movement fix
-    //TODO: Fix shape respawn time -> Set it to 10 sec
-    //TODO Fix Grid System \
-    //TODO : Fix Check x+15 in movement
+    //TODO: if shape collides -> add it to ShapeDecorator to build Tetris
 
 
     public partial class Form1 : Form
     {
         //Stack<Shape> shapes;
-        List<Shape> shapes = new List<Shape>();
         Shape shape;
+        ShapeDecorator _shapeDecorator;
+        List<Shape> shapes = new List<Shape>();
 
         public Form1()
         {
@@ -41,14 +39,16 @@ namespace TetrisGame
 
         private void respawnShapeTimer_Tick(object sender, EventArgs e)
         {
-            while(shape.IsColliding(pictureBox1.Bottom))
-            {
-                shape.OnShapeMovement(Direction.Down);
-            }
-            if (shape.IsColliding(pictureBox1.Bottom))
-            {
-                shape = ShapeFactory.CreateRandomShape();
-            }
+           // while(shape.IsColliding(pictureBox1.Bottom))
+           // {
+           //     shape.OnShapeMovement(Direction.Down);
+           // }
+           // if (shape.IsColliding(pictureBox1.Bottom))
+           // {
+           //     shape = ShapeFactory.CreateRandomShape();
+           // }
+
+
             pictureBox1.Invalidate();
         }
 

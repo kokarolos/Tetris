@@ -1,5 +1,4 @@
 ﻿using Models.Concrete;
-using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -8,13 +7,12 @@ namespace Models
 {
     public abstract class Shape : IDrawable, IMoveable
     {
-        protected int _xPosition;
-        protected int _yPosition;
+        public int _xPosition { get; }
+        public int _yPosition { get; }
         protected int _width;
         protected int _height;
         protected Color _color;
-
-        protected List<Rectangle> _rectangles;
+        public List<Rectangle> _rectangles { get; }
 
         public Shape()
         {
@@ -57,25 +55,25 @@ namespace Models
             for (int i = 0; i < _rectangles.Count; i++)
             {
                 Rectangle temp = _rectangles[i];
-                temp.Y += 10;
+                temp.Y += Settings.Speed;
                 _rectangles[i] = temp;
 
                 if(direction == Direction.Down)
                 {
                     temp = _rectangles[i];
-                    temp.Y += 10;
+                    temp.Y += Settings.Speed;
                     _rectangles[i] = temp;
                 }
                 if (direction == Direction.Left)
                 {
                     temp = _rectangles[i];
-                    temp.X -= 10;
+                    temp.X -= Settings.Speed;
                     _rectangles[i] = temp;
                 }
                 if (direction == Direction.Right)
                 {
                     temp = _rectangles[i];
-                    temp.X += 10;
+                    temp.X += Settings.Speed;
                     _rectangles[i] = temp;
                 }
 
