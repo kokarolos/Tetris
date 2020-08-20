@@ -7,8 +7,8 @@ namespace Models
 {
     public abstract class Shape : IDrawable, IMoveable
     {
-        public int _xPosition { get; }
-        public int _yPosition { get; }
+        public int XPosition { get; }
+        public int YPosition { get; }
         protected int _width;
         protected int _height;
         protected Color _color;
@@ -16,8 +16,8 @@ namespace Models
 
         public Shape()
         {
-            _xPosition = Settings.ShapePositionX;
-            _yPosition = Settings.ShapePositionY;
+            XPosition = Settings.ShapePositionX;
+            YPosition = Settings.ShapePositionY;
             _width = Settings.ShapeWidth;
             _height = Settings.ShapeWidth;
             _rectangles = new List<Rectangle>();
@@ -34,6 +34,7 @@ namespace Models
             }
         }
 
+        //Refactor this -> Delegate(?)
         public void Move(KeyEventArgs e)
         {
             if (e.KeyCode.Equals(Keys.Left))
@@ -58,7 +59,7 @@ namespace Models
                 temp.Y += Settings.Speed;
                 _rectangles[i] = temp;
 
-                if(direction == Direction.Down)
+                if (direction == Direction.Down)
                 {
                     temp = _rectangles[i];
                     temp.Y += Settings.Speed;
@@ -76,27 +77,24 @@ namespace Models
                     temp.X += Settings.Speed;
                     _rectangles[i] = temp;
                 }
-
             }
         }
 
-        //TODO: Check For collision
         public bool IsColliding(int pictureBoxBottom)
         {
-            int bottom = 0;
             foreach (var rect in _rectangles)
             {
-                if (bottom <= rect.Bottom)
+                if (rect.Y == pictureBoxBottom)
                 {
-                    bottom = rect.Bottom;
+                    return true;
                 }
             }
-            return bottom > pictureBoxBottom;
+            return false;
         }
 
         private void Rotate()
         {
-            //
+
         }
     }
 }

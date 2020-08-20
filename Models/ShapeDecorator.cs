@@ -3,13 +3,14 @@ using System.Collections.Generic;
 
 namespace Models
 {
-    public class ShapeDecorator : Shape
+    public sealed class ShapeDecorator : Shape
     {
         private Shape _shape;
         private List<Shape> _collindingShapes;
 
         public ShapeDecorator(Shape shape)
         {
+            _collindingShapes = new List<Shape>();
             _shape = shape;
             if (IsCollingWithAnotherShape(_shape))
             {
@@ -30,7 +31,7 @@ namespace Models
         {
             foreach (var collingShape in _collindingShapes)
             {
-                if (Math.Abs(shape._xPosition - collingShape._xPosition) >= 1.0f || Math.Abs(shape._yPosition - collingShape._yPosition) >= 1.0f)
+                if (Math.Abs(shape.XPosition - collingShape.XPosition) >= 1.0f || Math.Abs(shape.YPosition - collingShape.YPosition) >= 1.0f)
                 {
                     return true;
                 }

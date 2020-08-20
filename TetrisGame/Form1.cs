@@ -9,13 +9,12 @@ using System.Windows.Forms;
 namespace TetrisGame
 {
     //TODO: if shape collides -> add it to ShapeDecorator to build Tetris
-
+    //TODO: Fix GetTypes added temporary sealed in ShapeDecorator + Fix pattern
 
     public partial class Form1 : Form
     {
-        //Stack<Shape> shapes;
         Shape shape;
-        ShapeDecorator _shapeDecorator;
+        ShapeDecorator shapeDecorator;
         List<Shape> shapes = new List<Shape>();
 
         public Form1()
@@ -39,14 +38,13 @@ namespace TetrisGame
 
         private void respawnShapeTimer_Tick(object sender, EventArgs e)
         {
-           // while(shape.IsColliding(pictureBox1.Bottom))
-           // {
-           //     shape.OnShapeMovement(Direction.Down);
-           // }
-           // if (shape.IsColliding(pictureBox1.Bottom))
-           // {
-           //     shape = ShapeFactory.CreateRandomShape();
-           // }
+            shape.OnShapeMovement(Direction.Down);
+            if (shape.IsColliding(pictureBox1.Bottom))
+            {
+                //shape.Stop();
+                shape = ShapeFactory.CreateRandomShape();
+                shapes.Add(shape);
+            }
 
 
             pictureBox1.Invalidate();
@@ -55,7 +53,7 @@ namespace TetrisGame
         private List<Shape> CreateInitialShapes()
         {
             //shapes = new Stack<Shape>();
-            for (int i = 0; i < 1; i++)
+            for (int i = 0; i < 5; i++)
             {
                 shapes.Add(ShapeFactory.CreateRandomShape());
                 shape = shapes[i];

@@ -17,7 +17,7 @@ namespace Models.Factory
         private static Type[] GetAllShapesType()
         {
             var assembly = Assembly.GetExecutingAssembly();
-            return assembly.GetTypes().Where(t => typeof(Shape).IsAssignableFrom(t) && t.IsClass && !t.IsAbstract).ToArray();
+            return assembly.GetTypes().Where(t => typeof(Shape).IsAssignableFrom(t) && t.IsClass && !t.IsAbstract && !t.IsSealed).ToArray();
         }
 
     }

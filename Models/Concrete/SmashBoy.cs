@@ -13,7 +13,7 @@ namespace Models
         //Creates Initial Cube
         protected override void Create()
         {
-            _rectangles.Add(new Rectangle(_xPosition, _yPosition, _width, _height)); //Initial Rectangle
+            _rectangles.Add(new Rectangle(XPosition, YPosition, _width, _height)); //Initial Rectangle
             for (int i = 1; i <= 3; i++)
             {
                 _rectangles.Add(new Rectangle(_rectangles[0].X + _width, _rectangles[0].Y, _width, _height)); //Secondary Rectangle
