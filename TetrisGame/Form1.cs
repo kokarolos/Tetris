@@ -36,14 +36,13 @@ namespace TetrisGame
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             shape.Move(e);
-            shape.Rotate(e);
+            //shape.Rotate(e); <- Fix Rotation
         }
 
         private void respawnShapeTimer_Tick(object sender, EventArgs e)
         {
             if (shape.IsColliding(pictureBox1.Bottom))
             {
-                var type = shape.GetType();
                 shape.OnShapeMovement(Direction.Down,State.Idle);
                 shape.NextShape = ShapeFactory.CreateRandomShape();
                 foreach (var rects in shape._rectangles)
@@ -53,7 +52,6 @@ namespace TetrisGame
                         tetris = Rectangle.Union(rects, nextShapeRects);
                     }
                 }
-                shape = shape.NextShape;
                 shapes.Add(shape);
             }
             else

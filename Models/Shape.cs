@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Models
 {
-    public abstract partial class Shape : IDrawable, IMoveable
+    public abstract class Shape : IDrawable, IMoveable
     {
         public int XPosition { get; private set; }
         public int YPosition { get; private set; }
@@ -60,8 +60,7 @@ namespace Models
         {
             for (int i = 0; i < _rectangles.Count; i++)
             {
-                Rectangle temp = _rectangles[i];
-
+                Rectangle temp;
                 if (direction == Direction.Down && state == State.Active)
                 {
                     temp = _rectangles[i];
@@ -97,7 +96,6 @@ namespace Models
 
         public bool IsColliding(int pictureBoxBottom)
         {
-            //TODO fix the abs some times it doestn work
             foreach (var rect in _rectangles)
             {
                 if (Math.Abs(rect.Y - pictureBoxBottom) <= 15.0f)
