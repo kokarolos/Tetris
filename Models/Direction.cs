@@ -4,6 +4,7 @@
     {
         Down,
         Left,
-        Right
+        Right,
+        Idle
     }
 }

@@ -15,7 +15,6 @@ namespace TetrisGame
     public partial class Form1 : Form
     {
         Shape shape;
-        ShapeDecorator shapeDecorator;
         List<Shape> shapes = new List<Shape>();
 
         public Form1()
@@ -41,7 +40,7 @@ namespace TetrisGame
         {
             if (shape.IsColliding(pictureBox1.Bottom))
             {
-                //shape.Stop();
+                shape.OnShapeMovement(Direction.Idle);
                 shape = ShapeFactory.CreateRandomShape();
                 shapes.Add(shape);
             }
@@ -56,7 +55,6 @@ namespace TetrisGame
 
         private List<Shape> CreateInitialShapes()
         {
-            //shapes = new Stack<Shape>();
             for (int i = 0; i < 5; i++)
             {
                 shapes.Add(ShapeFactory.CreateRandomShape());

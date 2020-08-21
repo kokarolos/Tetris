@@ -2,12 +2,17 @@
 
 namespace Models.Concrete
 {
-    public class RhodeIslandZ :Shape
+    public class RhodeIslandZ : ShapeDecorator
     {
         public RhodeIslandZ()
         {
             _color = Color.Cyan;
             Create();
+        }
+
+        public RhodeIslandZ(Shape shape) : base(shape)
+        {
+            _shape = shape;
         }
 
         protected override void Create()

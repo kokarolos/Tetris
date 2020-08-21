@@ -2,12 +2,17 @@
 
 namespace Models
 {
-    public class Smashboy : Shape
+    public class Smashboy : ShapeDecorator
     {
         public Smashboy()
         {
             _color = Color.BlanchedAlmond;
             Create();
+        }
+
+        public Smashboy(Shape shape) : base(shape)
+        {
+            _shape = shape;
         }
 
         //Creates Initial Cube

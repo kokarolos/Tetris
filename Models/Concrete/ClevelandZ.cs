@@ -2,12 +2,17 @@
 
 namespace Models.Concrete
 {
-    public class ClevelandZ : Shape
+    public class ClevelandZ : ShapeDecorator
     {
         public ClevelandZ()
         {
             _color = Color.Cyan;
             Create();
+        }
+
+        public ClevelandZ(Shape shape) : base(shape)
+        {
+            _shape = shape;
         }
 
         //Creates Initial Ricky

@@ -16,5 +16,7 @@
         public static int WindowWidth { get => 668; }
         public static int WindowHeight { get => 555; }
 
+        public static int PictureBoxBottom { get => 451; }
+
     }
 }

@@ -2,12 +2,17 @@
 
 namespace Models.Concrete
 {
-    public class OrangeRicky : Shape
+    public class OrangeRicky : ShapeDecorator
     {
         public OrangeRicky()
         {
             _color = Color.Orange;
             Create();
+        }
+
+        public OrangeRicky(Shape shape) : base(shape)
+        {
+            _shape = shape;
         }
 
         //Creates Initial Ricky

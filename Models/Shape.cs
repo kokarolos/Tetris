@@ -36,6 +36,7 @@ namespace Models
         }
 
         //Refactor this -> Delegate(?)
+        //Check for Dictionary or Hash<KeyeventArgs,Direction>
         public void Move(KeyEventArgs e)
         {
             if (e.KeyCode.Equals(Keys.Left))
@@ -78,6 +79,12 @@ namespace Models
                     temp.X += Settings.Speed;
                     _rectangles[i] = temp;
                 }
+                if(direction == Direction.Idle)
+                {
+                    temp = _rectangles[i];
+                    temp.Y = Settings.PictureBoxBottom-Settings.ShapeHeight;
+                    _rectangles[i] = temp;
+                }
             }
         }
 
@@ -101,7 +108,7 @@ namespace Models
             Rectangle temp = new Rectangle();
             for (int i = 0; i < _rectangles.Count; i++)
             {
-                temp.X = pictureBoxBottom;
+                temp.Y = pictureBoxBottom;
                 temp = _rectangles[i];
                 _rectangles[i] = temp;
             }

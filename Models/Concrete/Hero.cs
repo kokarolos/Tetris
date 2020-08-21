@@ -12,6 +12,7 @@ namespace Models
 
         public Hero(Shape shape) : base(shape)
         {
+            _shape = shape;
         }
 
         //Creates Initial Hero

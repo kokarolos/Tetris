@@ -2,14 +2,19 @@
 
 namespace Models.Concrete
 {
-    public class BlueRicky : Shape
+    public class BlueRicky : ShapeDecorator
     {
-
         public BlueRicky()
         {
             _color = Color.Blue;
             Create();
         }
+
+        public BlueRicky(Shape shape) : base(shape)
+        {
+            _shape = shape;
+        }
+
         //Creates Initial Ricky
         protected override void Create()
         {
