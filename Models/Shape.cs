@@ -9,8 +9,8 @@ namespace Models
 {
     public abstract partial class Shape : IDrawable, IMoveable
     {
-        public int XPosition { get; }
-        public int YPosition { get; }
+        public int XPosition { get; private set; }
+        public int YPosition { get; private set; }
         protected int _width;
         protected int _height;
         protected Color _color;
@@ -25,6 +25,7 @@ namespace Models
             _height = Settings.ShapeWidth;
             _rectangles = new List<Rectangle>();
         }
+
         protected abstract void Create();
 
         public void Draw(PaintEventArgs e)
@@ -93,14 +94,14 @@ namespace Models
                 }
             }
         }
+
         public bool IsColliding(int pictureBoxBottom)
         {
             //TODO fix the abs some times it doestn work
             foreach (var rect in _rectangles)
             {
                 if (Math.Abs(rect.Y - pictureBoxBottom) <= 15.0f)
-                {
-                    StabilizeShapeBottom(_rectangles, pictureBoxBottom);
+                {  
                     return true;
                 }
             }
@@ -119,9 +120,14 @@ namespace Models
             }
         }
 
-        private void Rotate()
+        public void Rotate(KeyEventArgs e)
         {
-
+            if (e.KeyCode.Equals(Keys.Space))
+            {
+                int tempX = XPosition;
+                XPosition = -YPosition;
+                YPosition = tempX;
+            }
         }
     }
 }

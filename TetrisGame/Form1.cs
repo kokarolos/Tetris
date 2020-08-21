@@ -36,6 +36,7 @@ namespace TetrisGame
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             shape.Move(e);
+            shape.Rotate(e);
         }
 
         private void respawnShapeTimer_Tick(object sender, EventArgs e)
