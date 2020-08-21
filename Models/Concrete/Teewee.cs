@@ -2,12 +2,17 @@
 
 namespace Models.Concrete
 {
-    public class Teewee :Shape
+    public class Teewee : ShapeDecorator
     {
         public Teewee()
         {
             _color = Color.Red;
             Create();
+        }
+
+        public Teewee(Shape shape) : base(shape)
+        {
+            _shape = shape;
         }
 
         //Creates Initial Teewee

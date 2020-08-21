@@ -2,14 +2,18 @@
 
 namespace Models
 {
-    public class Hero : Shape
+    public class Hero : ShapeDecorator
     {
-        //public override Color Color { get; set; } = Color.Red;
-
         public Hero()
         {
+            _color = Color.Red;
             Create();
         }
+
+        public Hero(Shape shape) : base(shape)
+        {
+        }
+
         //Creates Initial Hero
         protected override void Create()
         {

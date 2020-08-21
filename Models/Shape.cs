@@ -86,18 +86,27 @@ namespace Models
             //TODO fix the abs some times it doestn work
             foreach (var rect in _rectangles)
             {
-                if (Math.Abs(rect.Y - pictureBoxBottom) <= 5.0f)
+                if (Math.Abs(rect.Y - pictureBoxBottom) <= 15.0f)
                 {
+                    StabilizeShapeBottom(_rectangles, pictureBoxBottom);
                     return true;
                 }
             }
             return false;
         }
 
-        private void Check()
+        private void StabilizeShapeBottom(List<Rectangle> rectangles, int pictureBoxBottom)
         {
             //IF shape.x is below pictureboxbottom then set shape.x to pictureboxbottom x
+            Rectangle temp = new Rectangle();
+            for (int i = 0; i < _rectangles.Count; i++)
+            {
+                temp.X = pictureBoxBottom;
+                temp = _rectangles[i];
+                _rectangles[i] = temp;
+            }
         }
+
 
         private void Rotate()
         {

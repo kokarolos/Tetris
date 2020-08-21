@@ -3,10 +3,15 @@ using System.Collections.Generic;
 
 namespace Models
 {
-    public sealed class ShapeDecorator : Shape
+    public abstract class ShapeDecorator : Shape
     {
-        private Shape _shape;
-        private List<Shape> _collindingShapes;
+        protected Shape _shape;
+        protected List<Shape> _collindingShapes;
+
+        public ShapeDecorator()
+        {
+
+        }
 
         public ShapeDecorator(Shape shape)
         {
