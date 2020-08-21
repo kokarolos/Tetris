@@ -1,10 +1,9 @@
-﻿namespace Models
+﻿namespace Enums
 {
     public enum Direction
     {
         Down,
         Left,
         Right,
-        Idle
     }
 }

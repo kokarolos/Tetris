@@ -6,7 +6,7 @@ namespace Models.Concrete
     {
         public RhodeIslandZ()
         {
-            _color = Color.Cyan;
+            _color = Color.YellowGreen;
             Create();
         }
 

@@ -22,9 +22,9 @@ namespace Models.Concrete
             {
                 if (i == 4)
                 {
-                    _rectangles.Add(new Rectangle(_rectangles[3].X + 10, _rectangles[3].Y - _width, _width, _height));
+                    _rectangles.Add(new Rectangle(_rectangles[3].X + 13, _rectangles[3].Y - _width, _width, _height));
                 }
-                _rectangles.Add(new Rectangle(XPosition + i * 10, YPosition + _width, _width, _height));
+                _rectangles.Add(new Rectangle(XPosition + i * 13, YPosition + _width, _width, _height));
             }
         }
     }

@@ -1,10 +1,11 @@
-﻿using System.Windows.Forms;
+﻿using Enums;
+using System.Windows.Forms;
 
 namespace Models
 {
     public interface IMoveable
     {
         void Move(KeyEventArgs e);
-        void OnShapeMovement(Direction direction);
+        void OnShapeMovement(Direction direction,State state);
     }
 }

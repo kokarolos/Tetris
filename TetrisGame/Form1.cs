@@ -1,4 +1,5 @@
-﻿using Models;
+﻿using Enums;
+using Models;
 using Models.Concrete;
 using Models.Factory;
 using System;
@@ -9,13 +10,14 @@ using System.Windows.Forms;
 namespace TetrisGame
 {
     //TODO: if shape collides -> add it to ShapeDecorator to build Tetris
-    //TODO: Fix GetTypes added temporary sealed in ShapeDecorator + Fix pattern
-    //TODO: Fix Create Shape bug (randomly shape isnt spawned)
+    //Investigate if decorator will help me
 
     public partial class Form1 : Form
     {
         Shape shape;
+        ShapeDecorator shapeDecorator;
         List<Shape> shapes = new List<Shape>();
+        Rectangle tetris;
 
         public Form1()
         {
@@ -40,13 +42,22 @@ namespace TetrisGame
         {
             if (shape.IsColliding(pictureBox1.Bottom))
             {
-                shape.OnShapeMovement(Direction.Idle);
-                shape = ShapeFactory.CreateRandomShape();
+                var type = shape.GetType();
+                shape.OnShapeMovement(Direction.Down,State.Idle);
+                shape.NextShape = ShapeFactory.CreateRandomShape();
+                foreach (var rects in shape._rectangles)
+                {
+                    foreach (var nextShapeRects in shape.NextShape._rectangles)
+                    {
+                        tetris = Rectangle.Union(rects, nextShapeRects);
+                    }
+                }
+                shape = shape.NextShape;
                 shapes.Add(shape);
             }
             else
             {
-                shape.OnShapeMovement(Direction.Down);
+                shape.OnShapeMovement(Direction.Down,State.Active);
             }
 
 

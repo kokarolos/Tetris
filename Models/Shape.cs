@@ -1,4 +1,5 @@
-﻿using Models.Concrete;
+﻿using Enums;
+using Models.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -6,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Models
 {
-    public abstract class Shape : IDrawable, IMoveable
+    public abstract partial class Shape : IDrawable, IMoveable
     {
         public int XPosition { get; }
         public int YPosition { get; }
@@ -14,6 +15,7 @@ namespace Models
         protected int _height;
         protected Color _color;
         public List<Rectangle> _rectangles { get; }
+        public Shape NextShape { get; set; }
 
         public Shape()
         {
@@ -41,53 +43,56 @@ namespace Models
         {
             if (e.KeyCode.Equals(Keys.Left))
             {
-                OnShapeMovement(Direction.Left);
+                OnShapeMovement(Direction.Left, State.Active);
             }
             if (e.KeyCode.Equals(Keys.Right))
             {
-                OnShapeMovement(Direction.Right);
+                OnShapeMovement(Direction.Right, State.Active);
             }
             if (e.KeyCode.Equals(Keys.Down))
             {
-                OnShapeMovement(Direction.Down);
+                OnShapeMovement(Direction.Down, State.Active);
             }
         }
 
-        public void OnShapeMovement(Direction direction)
+        public void OnShapeMovement(Direction direction, State state)
         {
             for (int i = 0; i < _rectangles.Count; i++)
             {
                 Rectangle temp = _rectangles[i];
-                temp.Y += Settings.Speed;
-                _rectangles[i] = temp;
 
-                if (direction == Direction.Down)
+                if (direction == Direction.Down && state == State.Active)
                 {
                     temp = _rectangles[i];
                     temp.Y += Settings.Speed;
                     _rectangles[i] = temp;
                 }
-                if (direction == Direction.Left)
+                if (direction == Direction.Down && state == State.Active)
+                {
+                    temp = _rectangles[i];
+                    temp.Y += Settings.Speed;
+                    _rectangles[i] = temp;
+                }
+                if (direction == Direction.Left && state == State.Active)
                 {
                     temp = _rectangles[i];
                     temp.X -= Settings.Speed;
                     _rectangles[i] = temp;
                 }
-                if (direction == Direction.Right)
+                if (direction == Direction.Right && state == State.Active)
                 {
                     temp = _rectangles[i];
                     temp.X += Settings.Speed;
                     _rectangles[i] = temp;
                 }
-                if(direction == Direction.Idle)
+                if (direction == Direction.Down && state == State.Idle)
                 {
                     temp = _rectangles[i];
-                    temp.Y = Settings.PictureBoxBottom-Settings.ShapeHeight;
+                    temp.Y = Settings.PictureBoxBottom - Settings.ShapeHeight;
                     _rectangles[i] = temp;
                 }
             }
         }
-
         public bool IsColliding(int pictureBoxBottom)
         {
             //TODO fix the abs some times it doestn work
@@ -113,7 +118,6 @@ namespace Models
                 _rectangles[i] = temp;
             }
         }
-
 
         private void Rotate()
         {

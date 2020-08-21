@@ -20,7 +20,7 @@ namespace Models
         {
             for (int i = 0; i <= 4; i++)
             {
-                _rectangles.Add(new Rectangle(XPosition + i * 10, YPosition + _width, _width, _height));
+                _rectangles.Add(new Rectangle(XPosition + i * 13, YPosition + _width, _width, _height));
             }
         }
     }
