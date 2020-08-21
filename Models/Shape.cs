@@ -1,4 +1,5 @@
 ﻿using Models.Concrete;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -82,14 +83,20 @@ namespace Models
 
         public bool IsColliding(int pictureBoxBottom)
         {
+            //TODO fix the abs some times it doestn work
             foreach (var rect in _rectangles)
             {
-                if (rect.Y == pictureBoxBottom)
+                if (Math.Abs(rect.Y - pictureBoxBottom) <= 5.0f)
                 {
                     return true;
                 }
             }
             return false;
+        }
+
+        private void Check()
+        {
+            //IF shape.x is below pictureboxbottom then set shape.x to pictureboxbottom x
         }
 
         private void Rotate()

@@ -10,6 +10,7 @@ namespace TetrisGame
 {
     //TODO: if shape collides -> add it to ShapeDecorator to build Tetris
     //TODO: Fix GetTypes added temporary sealed in ShapeDecorator + Fix pattern
+    //TODO: Fix Create Shape bug (randomly shape isnt spawned)
 
     public partial class Form1 : Form
     {
@@ -38,12 +39,15 @@ namespace TetrisGame
 
         private void respawnShapeTimer_Tick(object sender, EventArgs e)
         {
-            shape.OnShapeMovement(Direction.Down);
             if (shape.IsColliding(pictureBox1.Bottom))
             {
                 //shape.Stop();
                 shape = ShapeFactory.CreateRandomShape();
                 shapes.Add(shape);
+            }
+            else
+            {
+                shape.OnShapeMovement(Direction.Down);
             }
 
 
