@@ -40,7 +40,7 @@ namespace TetrisGame
         private void respawnShapeTimer_Tick(object sender, EventArgs e)
         {
             if (shape.IsCollidingPictureBoxBottom(pictureBox1.Bottom) ||
-                shape.IsCollidingAnotherShape(shape._rectangles,shapes))
+                shape.IsCollidingAnotherShape(shape._rectangles, shapes))
             {
                 shape.OnShapeMovement(Direction.Down, State.Idle);
                 shapes.Add(shape);

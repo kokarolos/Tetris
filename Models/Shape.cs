@@ -121,9 +121,9 @@ namespace Models
             {
                 foreach (var rect in shape._rectangles)
                 {
-                    foreach (var rectangle in nextShapeRectangles)
+                    foreach (var nextShapeRectangle in nextShapeRectangles)
                     {
-                        if (rect.Y - rectangle.Y <= 30.0f)
+                        if (rect.Y - nextShapeRectangle.Y <= 30.0f && rect.X - nextShapeRectangle.X <= 30.0f)
                         {
                             return true;
                         }
