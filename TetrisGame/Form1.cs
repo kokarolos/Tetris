@@ -15,14 +15,12 @@ namespace TetrisGame
     public partial class Form1 : Form
     {
         Shape shape;
-        ShapeDecorator shapeDecorator;
         List<Shape> shapes = new List<Shape>();
-        Rectangle tetris;
 
         public Form1()
         {
             InitializeComponent();
-            shapes = CreateInitialShapes();
+            shape = ShapeFactory.CreateRandomShape();
             KeyDown += new KeyEventHandler(Form1_KeyDown);
             InitializeTimers();
         }
@@ -31,47 +29,41 @@ namespace TetrisGame
         {
             DrawGridSystem(e);
             shape.Draw(e);
+            shapes.ForEach(shape => shape.Draw(e));
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             shape.Move(e);
-            //shape.Rotate(e); <- Fix Rotation
         }
 
         private void respawnShapeTimer_Tick(object sender, EventArgs e)
         {
             if (shape.IsColliding(pictureBox1.Bottom))
             {
-                shape.OnShapeMovement(Direction.Down,State.Idle);
-                shape.NextShape = ShapeFactory.CreateRandomShape();
-                foreach (var rects in shape._rectangles)
-                {
-                    foreach (var nextShapeRects in shape.NextShape._rectangles)
-                    {
-                        tetris = Rectangle.Union(rects, nextShapeRects);
-                    }
-                }
+                shape.OnShapeMovement(Direction.Down, State.Idle);
                 shapes.Add(shape);
+                shape.NextShape = ShapeFactory.CreateRandomShape();
+                shape = shape.NextShape;
             }
             else
             {
-                shape.OnShapeMovement(Direction.Down,State.Active);
+                shape.OnShapeMovement(Direction.Down, State.Active);
             }
 
 
             pictureBox1.Invalidate();
         }
 
-        private List<Shape> CreateInitialShapes()
-        {
-            for (int i = 0; i < 5; i++)
-            {
-                shapes.Add(ShapeFactory.CreateRandomShape());
-                shape = shapes[i];
-            }
-            return shapes;
-        }
+        // private List<Shape> CreateInitialShapes()
+        // {
+        //     for (int i = 0; i < 5; i++)
+        //     {
+        //         shapes.Add(ShapeFactory.CreateRandomShape());
+        //         shape = shapes[i];
+        //     }
+        //     return shapes;
+        // }
 
         private void InitializeTimers()
         {

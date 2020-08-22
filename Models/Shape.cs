@@ -14,6 +14,8 @@ namespace Models
         protected int _width;
         protected int _height;
         protected Color _color;
+        protected float velocity { get; private set; }
+
         public List<Rectangle> _rectangles { get; }
         public Shape NextShape { get; set; }
 
@@ -24,6 +26,7 @@ namespace Models
             _width = Settings.ShapeWidth;
             _height = Settings.ShapeWidth;
             _rectangles = new List<Rectangle>();
+            velocity = 1.0f;
         }
 
         protected abstract void Create();
@@ -63,32 +66,37 @@ namespace Models
                 Rectangle temp;
                 if (direction == Direction.Down && state == State.Active)
                 {
+                    velocity = 1.2f;
                     temp = _rectangles[i];
-                    temp.Y += Settings.Speed;
+                    temp.Y += (int)(Settings.Speed * velocity);
                     _rectangles[i] = temp;
                 }
                 if (direction == Direction.Down && state == State.Active)
                 {
+                    velocity = 1.0f;
                     temp = _rectangles[i];
-                    temp.Y += Settings.Speed;
+                    temp.Y += (int)(Settings.Speed * velocity);
                     _rectangles[i] = temp;
                 }
                 if (direction == Direction.Left && state == State.Active)
                 {
+                    velocity = 1.0f;
                     temp = _rectangles[i];
-                    temp.X -= Settings.Speed;
+                    temp.X -= (int)(Settings.Speed * velocity);
                     _rectangles[i] = temp;
                 }
                 if (direction == Direction.Right && state == State.Active)
                 {
+                    velocity = 1.0f;
                     temp = _rectangles[i];
-                    temp.X += Settings.Speed;
+                    temp.X += (int)(Settings.Speed * velocity);
                     _rectangles[i] = temp;
                 }
                 if (direction == Direction.Down && state == State.Idle)
                 {
+                    velocity = 0f;
                     temp = _rectangles[i];
-                    temp.Y = Settings.PictureBoxBottom - Settings.ShapeHeight;
+                    temp.Y += (int)(Settings.Speed * velocity);
                     _rectangles[i] = temp;
                 }
             }
@@ -112,7 +120,7 @@ namespace Models
             Rectangle temp = new Rectangle();
             for (int i = 0; i < _rectangles.Count; i++)
             {
-                temp.Y = pictureBoxBottom;
+                temp.Y =  pictureBoxBottom - Settings.ShapeHeight;
                 temp = _rectangles[i];
                 _rectangles[i] = temp;
             }

@@ -2,17 +2,12 @@
 
 namespace Models
 {
-    public class Hero : ShapeDecorator
+    public class Hero : Shape
     {
         public Hero()
         {
             _color = Color.Red;
             Create();
-        }
-
-        public Hero(Shape shape) : base(shape)
-        {
-            _shape = shape;
         }
 
         //Creates Initial Hero
