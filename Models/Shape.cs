@@ -102,13 +102,33 @@ namespace Models
             }
         }
 
-        public bool IsColliding(int pictureBoxBottom)
+        public bool IsCollidingPictureBoxBottom(int pictureBoxBottom)
         {
             foreach (var rect in _rectangles)
             {
-                if (Math.Abs(rect.Y - pictureBoxBottom) <= 15.0f)
-                {  
+                if (Math.Abs(rect.Y - pictureBoxBottom) <= 30.0f)
+                {
                     return true;
+                }
+            }
+            return false;
+        }
+
+        //Refactor this
+        public bool IsCollidingAnotherShape(List<Rectangle> nextShapeRectangles, List<Shape> shapes)
+        {
+            foreach (var shape in shapes)
+            {
+                foreach (var rect in shape._rectangles)
+                {
+                    foreach (var rectangle in nextShapeRectangles)
+                    {
+                        if (rect.Y - rectangle.Y <= 30.0f)
+                        {
+                            return true;
+                        }
+
+                    }
                 }
             }
             return false;
@@ -120,7 +140,7 @@ namespace Models
             Rectangle temp = new Rectangle();
             for (int i = 0; i < _rectangles.Count; i++)
             {
-                temp.Y =  pictureBoxBottom - Settings.ShapeHeight;
+                temp.Y = pictureBoxBottom - Settings.ShapeHeight;
                 temp = _rectangles[i];
                 _rectangles[i] = temp;
             }
