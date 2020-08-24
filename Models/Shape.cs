@@ -106,7 +106,7 @@ namespace Models
         {
             foreach (var rect in _rectangles)
             {
-                if (Math.Abs(rect.Y - pictureBoxBottom) <= 30.0f)
+                if (Math.Abs(rect.Bottom - pictureBoxBottom) <= 10.0f)
                 {
                     return true;
                 }
