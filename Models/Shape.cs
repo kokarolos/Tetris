@@ -3,6 +3,7 @@ using Models.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Models
@@ -14,8 +15,7 @@ namespace Models
         protected int _width;
         protected int _height;
         protected Color _color;
-        protected float velocity { get; private set; }
-
+        protected float _velocity { get; private set; }
         public List<Rectangle> _rectangles { get; }
         public Shape NextShape { get; set; }
 
@@ -26,7 +26,7 @@ namespace Models
             _width = Settings.ShapeWidth;
             _height = Settings.ShapeWidth;
             _rectangles = new List<Rectangle>();
-            velocity = 1.0f;
+            _velocity = 1.0f;
         }
 
         protected abstract void Create();
@@ -66,37 +66,34 @@ namespace Models
                 Rectangle temp;
                 if (direction == Direction.Down && state == State.Active)
                 {
-                    velocity = 1.2f;
+                    _velocity = 1.2f;
                     temp = _rectangles[i];
-                    temp.Y += (int)(Settings.Speed * velocity);
+                    temp.Y += (int)(Settings.Speed * _velocity);
                     _rectangles[i] = temp;
                 }
                 if (direction == Direction.Down && state == State.Active)
                 {
-                    velocity = 1.0f;
                     temp = _rectangles[i];
-                    temp.Y += (int)(Settings.Speed * velocity);
+                    temp.Y += (int)(Settings.Speed * _velocity);
                     _rectangles[i] = temp;
                 }
                 if (direction == Direction.Left && state == State.Active)
                 {
-                    velocity = 1.0f;
                     temp = _rectangles[i];
-                    temp.X -= (int)(Settings.Speed * velocity);
+                    temp.X -= (int)(Settings.Speed * _velocity);
                     _rectangles[i] = temp;
                 }
                 if (direction == Direction.Right && state == State.Active)
                 {
-                    velocity = 1.0f;
                     temp = _rectangles[i];
-                    temp.X += (int)(Settings.Speed * velocity);
+                    temp.X += (int)(Settings.Speed * _velocity);
                     _rectangles[i] = temp;
                 }
                 if (direction == Direction.Down && state == State.Idle)
                 {
-                    velocity = 0f;
+                    _velocity = 0f;
                     temp = _rectangles[i];
-                    temp.Y += (int)(Settings.Speed * velocity);
+                    temp.Y += (int)(Settings.Speed * _velocity);
                     _rectangles[i] = temp;
                 }
             }
@@ -104,13 +101,15 @@ namespace Models
 
         public bool IsCollidingPictureBoxBottom(int pictureBoxBottom)
         {
-            foreach (var rect in _rectangles)
+
+            foreach (var rectangle in _rectangles)
             {
-                if (Math.Abs(rect.Bottom - pictureBoxBottom) <= 5.0f)
+                if (Math.Abs(rectangle.Bottom - pictureBoxBottom) <= 5.0f)
                 {
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -119,17 +118,19 @@ namespace Models
         {
             foreach (var shape in shapes)
             {
-                foreach (var rect in shape._rectangles)
+                foreach (var rectangle in shape._rectangles)
                 {
-                    foreach (var nextShapeRectangle in nextShapeRectangles)
+                    foreach (var incomingRectangle in nextShapeRectangles)
                     {
-                        if (rect.Y - nextShapeRectangle.Y <= Settings.ShapeWidth && rect.X - nextShapeRectangle.X <= 10.0f)
+                        if (rectangle.Location.Y - incomingRectangle.Location.X
+                            <= 20.0f && rectangle.Location.X - incomingRectangle.Location.X <=20.0f)
                         {
                             return true;
                         }
 
                     }
                 }
+
             }
             return false;
         }
