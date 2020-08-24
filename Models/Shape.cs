@@ -106,7 +106,7 @@ namespace Models
         {
             foreach (var rect in _rectangles)
             {
-                if (Math.Abs(rect.Bottom - pictureBoxBottom) <= 10.0f)
+                if (Math.Abs(rect.Bottom - pictureBoxBottom) <= 5.0f)
                 {
                     return true;
                 }
@@ -123,7 +123,7 @@ namespace Models
                 {
                     foreach (var nextShapeRectangle in nextShapeRectangles)
                     {
-                        if (rect.Y - nextShapeRectangle.Y <= 30.0f && rect.X - nextShapeRectangle.X <= 30.0f)
+                        if (rect.Y - nextShapeRectangle.Y <= Settings.ShapeWidth && rect.X - nextShapeRectangle.X <= 10.0f)
                         {
                             return true;
                         }
@@ -154,6 +154,21 @@ namespace Models
                 XPosition = -YPosition;
                 YPosition = tempX;
             }
+        }
+
+        private Point GetMaxY(List<Rectangle> nextShapeRectangles)
+        {
+            Point maxPointY = new Point(0, 0);
+            for (int i = nextShapeRectangles.Count - 1; i <= 0; i--)
+            {
+                if (nextShapeRectangles[i].Y >= nextShapeRectangles[i - 1].Y)
+                {
+                    maxPointY.X = nextShapeRectangles[i].X;
+                    maxPointY.Y = nextShapeRectangles[i].Y;
+                    return maxPointY;
+                }
+            }
+            throw new InvalidOperationException();
         }
     }
 }
