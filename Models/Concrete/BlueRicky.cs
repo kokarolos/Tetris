@@ -18,5 +18,6 @@ namespace Models.Concrete
             _rectangles.Add(new Rectangle(_rectangles[1].X + _width, _rectangles[1].Y, _width, _height));
             _rectangles.Add(new Rectangle(_rectangles[2].X + _width, _rectangles[1].Y, _width, _height));
         }
+
     }
 }

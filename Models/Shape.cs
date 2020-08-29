@@ -12,19 +12,26 @@ namespace Models
     {
         public int XPosition { get; private set; }
         public int YPosition { get; private set; }
-        protected int _width;
-        protected int _height;
+        protected int _width
+        {
+            get => _rectangles.Sum(x => x.X);
+        }
+        protected int _height
+        {
+            get => _rectangles.Sum(x => x.Y);
+        }
         protected Color _color;
         protected float _velocity { get; private set; }
         public List<Rectangle> _rectangles { get; }
         public Shape NextShape { get; set; }
+        //public int Top { get; }
+        //public int Bottom { get; }
+
 
         public Shape()
         {
             XPosition = Settings.ShapePositionX;
             YPosition = Settings.ShapePositionY;
-            _width = Settings.ShapeWidth;
-            _height = Settings.ShapeWidth;
             _rectangles = new List<Rectangle>();
             _velocity = 1.0f;
         }
@@ -114,62 +121,52 @@ namespace Models
         }
 
         //Refactor this
-        public bool IsCollidingAnotherShape(List<Rectangle> nextShapeRectangles, List<Shape> shapes)
+        public bool IsCollidingAnotherShape(List<Shape> shapes)
         {
             foreach (var shape in shapes)
             {
-                foreach (var rectangle in shape._rectangles)
+                if (shape.GetTop() - this.GetTop() <= 30.0f && shape.GetBottom() - this.GetBottom() <= 30.0f)
                 {
-                    foreach (var incomingRectangle in nextShapeRectangles)
-                    {
-                        if (rectangle.Location.Y - incomingRectangle.Location.X
-                            <= 20.0f && rectangle.Location.X - incomingRectangle.Location.X <=20.0f)
-                        {
-                            return true;
-                        }
-
-                    }
+                    return true;
                 }
-
             }
             return false;
         }
-
-        private void StabilizeShapeBottom(List<Rectangle> rectangles, int pictureBoxBottom)
+        public int GetBottom()
         {
-            //IF shape.x is below pictureboxbottom then set shape.x to pictureboxbottom x
-            Rectangle temp = new Rectangle();
-            for (int i = 0; i < _rectangles.Count; i++)
+            int lowestPoint = 0;
+            for (int i = _rectangles.Count - 1; i >= 1; i--)
             {
-                temp.Y = pictureBoxBottom - Settings.ShapeHeight;
-                temp = _rectangles[i];
-                _rectangles[i] = temp;
-            }
-        }
-
-        public void Rotate(KeyEventArgs e)
-        {
-            if (e.KeyCode.Equals(Keys.Space))
-            {
-                int tempX = XPosition;
-                XPosition = -YPosition;
-                YPosition = tempX;
-            }
-        }
-
-        private Point GetMaxY(List<Rectangle> nextShapeRectangles)
-        {
-            Point maxPointY = new Point(0, 0);
-            for (int i = nextShapeRectangles.Count - 1; i <= 0; i--)
-            {
-                if (nextShapeRectangles[i].Y >= nextShapeRectangles[i - 1].Y)
+                var currentRectangle = _rectangles[i].X;
+                var nextRectangle = _rectangles[i - 1].X;
+                if (currentRectangle >= nextRectangle)
                 {
-                    maxPointY.X = nextShapeRectangles[i].X;
-                    maxPointY.Y = nextShapeRectangles[i].Y;
-                    return maxPointY;
+                    lowestPoint = currentRectangle;
+                }
+                else
+                {
+                    lowestPoint = _rectangles[0].X;
                 }
             }
-            throw new InvalidOperationException();
+            return lowestPoint;
+        }
+        public int GetTop()
+        {
+            int highestPoint = 0;
+            for (int i = _rectangles.Count - 1; i >= 1; i--)
+            {
+                var currentRectangle = _rectangles[i].Y;
+                var nextRectangle = _rectangles[i - 1].Y;
+                if (currentRectangle <= nextRectangle)
+                {
+                    highestPoint = currentRectangle;
+                }
+                else
+                {
+                    highestPoint = _rectangles[0].Y;
+                }
+            }
+            return highestPoint;
         }
     }
 }

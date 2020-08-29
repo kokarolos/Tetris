@@ -11,6 +11,7 @@ namespace TetrisGame
 {
     //TODO: if shape collides -> add it to ShapeDecorator to build Tetris
     //Investigate if decorator will help me
+    //TODO : Calculate shape's _width , _height Correctly;
 
     public partial class Form1 : Form
     {
@@ -27,7 +28,16 @@ namespace TetrisGame
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
+
             DrawGridSystem(e);
+            //var shape = ShapeFactory.CreateRandomShape();
+            //var shapeTop = shape.GetTop();
+            //var shapeBottom = shape.GetBottom();
+            //Graphics g = e.Graphics;
+            //SolidBrush b = new SolidBrush(Color.Yellow);
+            //var p1 = new Point(shapeBottom);
+            //var p2 = new Point(shapeTop);
+            //g.DrawLine(new Pen(b), p1, p2);
             shape.Draw(e);
             shapes.ForEach(shape => shape.Draw(e));
         }
@@ -40,7 +50,7 @@ namespace TetrisGame
         private void respawnShapeTimer_Tick(object sender, EventArgs e)
         {
             if (shape.IsCollidingPictureBoxBottom(pictureBox1.Bottom) ||
-                shape.IsCollidingAnotherShape(shape._rectangles, shapes))
+                shape.IsCollidingAnotherShape(shapes))
             {
                 shape.OnShapeMovement(Direction.Down, State.Idle);
                 shapes.Add(shape);
@@ -51,20 +61,8 @@ namespace TetrisGame
             {
                 shape.OnShapeMovement(Direction.Down, State.Active);
             }
-
-
             pictureBox1.Invalidate();
         }
-
-        // private List<Shape> CreateInitialShapes()
-        // {
-        //     for (int i = 0; i < 5; i++)
-        //     {
-        //         shapes.Add(ShapeFactory.CreateRandomShape());
-        //         shape = shapes[i];
-        //     }
-        //     return shapes;
-        // }
 
         private void InitializeTimers()
         {
